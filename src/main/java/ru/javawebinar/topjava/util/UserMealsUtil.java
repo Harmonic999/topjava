@@ -31,7 +31,6 @@ public class UserMealsUtil {
 
         Map<LocalDate, Integer> dateTotalCaloriesMap = new HashMap<>();
         List<UserMeal> filteredMealList = new ArrayList<>();
-        List<UserMealWithExceed> result = new ArrayList<>();
 
         for (UserMeal userMeal : mealList) {
             LocalTime time = userMeal.getDateTime().toLocalTime();
@@ -43,6 +42,8 @@ public class UserMealsUtil {
                 filteredMealList.add(userMeal);
             }
         }
+
+        List<UserMealWithExceed> result = new ArrayList<>();
 
         for (UserMeal userMeal : filteredMealList) {
             UserMealWithExceed newMealWithExceed = new UserMealWithExceed(userMeal.getDateTime(),
