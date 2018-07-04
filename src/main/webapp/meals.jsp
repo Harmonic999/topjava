@@ -44,10 +44,7 @@
                 </c:if>
 
                 <td>
-                    <form action = "meals" method = "POST">
-                        <input type="hidden" name="meal_id" value="${meal.id}" />
-                        <input type = "submit" value = "Delete" />
-                    </form>
+                    <a href="meals?action=delete&meal_id=${meal.id}">delete</a>
                 </td>
 
             </tr>

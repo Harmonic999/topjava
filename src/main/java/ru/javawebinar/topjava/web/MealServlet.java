@@ -21,14 +21,23 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String actionPar = request.getParameter("action");
+
+        if (actionPar != null && actionPar.equalsIgnoreCase("delete")) {
+            int id = Integer.parseInt(request.getParameter("meal_id"));
+            System.out.println(id);
+            service.delete(id);
+            log.debug("Deleting meal with id=" + id);
+        }
         request.setAttribute("mealsList", MealsUtil.getFilteredWithExceeded(service.getMealList(), LocalTime.MIN, LocalTime.MAX, 1500));
         request.getRequestDispatcher("meals.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("meal_id");
-        service.delete(Integer.parseInt(id));
-        doGet(request, response);
+
+
+        request.setAttribute("mealsList", MealsUtil.getFilteredWithExceeded(service.getMealList(), LocalTime.MIN, LocalTime.MAX, 1500));
+        request.getRequestDispatcher("meals.jsp").forward(request, response);
     }
 }
