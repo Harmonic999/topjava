@@ -5,30 +5,33 @@
     <title>Meals</title>
     <style type="text/css">
         TABLE {
-            width: max-content; /* Ширина таблицы */
-            border-collapse: collapse; /* Убираем двойные линии между ячейками */
+            width: max-content;
+            border-collapse: collapse;
             text-align: center;
             font-size: 20px;
         }
         TD, TH {
-            padding: 6px; /* Поля вокруг содержимого таблицы */
-            border: 1px solid black; /* Параметры рамки */
+            padding: 6px;
+            border: 1px solid black;
         }
         TH {
-            background: #c0e3e6; /* Цвет фона */
+            background: #c0e3e6;
         }
     </style>
 </head>
 <body>
     <table>
         <tr>
+            <th>ID</th>
             <th>Date</th>
             <th>Meal</th>
             <th>Calories</th>
-            <th>Exceeded</th>
+            <th>Delete</th>
         </tr>
         <c:forEach items="${mealsList}" var="meal">
+
             <tr>
+                <td><a>${meal.id}</a></td>
                 <td><a>${meal.stringDateTime}</a></td>
                 <td><a>${meal.description}</a></td>
 
@@ -40,7 +43,13 @@
                     <td><a style="color: green">${meal.calories}</a></td>
                 </c:if>
 
-                <td><a>${meal.exceed}</a></td>
+                <td>
+                    <form action = "meals" method = "POST">
+                        <input type="hidden" name="meal_id" value="${meal.id}" />
+                        <input type = "submit" value = "Delete" />
+                    </form>
+                </td>
+
             </tr>
         </c:forEach>
     </table>

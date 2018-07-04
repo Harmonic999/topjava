@@ -14,10 +14,13 @@ public class MealWithExceed {
 
     private final String stringDateTime;
 
-    public MealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed) {
+    private int id;
+
+    public MealWithExceed(LocalDateTime dateTime, String description, int calories, int id, boolean exceed) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
+        this.id = id;
         this.exceed = exceed;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
@@ -42,5 +45,9 @@ public class MealWithExceed {
 
     public String getStringDateTime() {
         return stringDateTime;
+    }
+
+    public int getId() {
+        return id;
     }
 }
