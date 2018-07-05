@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -24,20 +25,17 @@ public class MealServlet extends HttpServlet {
         String actionPar = request.getParameter("action");
 
         if (actionPar != null && actionPar.equalsIgnoreCase("delete")) {
-            int id = Integer.parseInt(request.getParameter("meal_id"));
-            System.out.println(id);
+            int id = getId(request);
             service.delete(id);
             log.debug("Deleting meal with id=" + id);
+            response.sendRedirect("meals");
+        } else {
+            request.setAttribute("mealsList", MealsUtil.getFilteredWithExceeded(service.getMealList(), LocalTime.MIN, LocalTime.MAX, 1500));
+            request.getRequestDispatcher("meals.jsp").forward(request, response);
         }
-        request.setAttribute("mealsList", MealsUtil.getFilteredWithExceeded(service.getMealList(), LocalTime.MIN, LocalTime.MAX, 1500));
-        request.getRequestDispatcher("meals.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-        request.setAttribute("mealsList", MealsUtil.getFilteredWithExceeded(service.getMealList(), LocalTime.MIN, LocalTime.MAX, 1500));
-        request.getRequestDispatcher("meals.jsp").forward(request, response);
+    private int getId(HttpServletRequest request) {
+        return Integer.valueOf(Objects.requireNonNull(request.getParameter("meal_id")));
     }
 }
