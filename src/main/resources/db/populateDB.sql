@@ -11,7 +11,7 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100000),
   ('ROLE_ADMIN', 100001);
 
-INSERT INTO meals (description, calories) VALUES 
-  ('завтрак', 600),
-  ('обед', 900),
-  ('ужин', 500)
+INSERT INTO meals (description, calories, datetime) VALUES
+  ('завтрак', 600, '2018-07-17 13:42:26'),
+  ('обед', 900, '2018-07-17 13:42:27'),
+  ('ужин', 500, '2018-07-17 13:42:30')
