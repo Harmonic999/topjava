@@ -12,4 +12,8 @@ public class Util {
     public static <T> T orElse(T value, T defaultValue) {
         return value == null ? defaultValue : value;
     }
+
+    public static float nanoToSeconds(long nanoTime) {
+        return nanoTime / 1000000;
+    }
 }
