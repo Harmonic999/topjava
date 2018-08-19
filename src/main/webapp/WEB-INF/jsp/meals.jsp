@@ -59,6 +59,33 @@
         </c:forEach>
     </table>
 </section>
+
+<h2 onmouseover="requestMealsList()">Наведи мышь сюда!!!</h2>
+
+<script>
+
+    var requestMealsList = function () {
+        var requestUrl = 'http://localhost:8080/rest/meals';
+        var request = new XMLHttpRequest();
+        request.open('GET', requestUrl);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function () {
+            var mealz = request.response;
+            showMealz(mealz);
+        }
+    }
+
+    var showMealz = function (jsonArray) {
+        var mealz = jsonArray;
+        for (var i = 0; i < mealz.length; i++) {
+            console.log(mealz[i].description);
+        }
+    }
+
+</script>
+
+
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
