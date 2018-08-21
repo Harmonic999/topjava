@@ -50,7 +50,6 @@
         <property name="fallbackToSystemLocale" value="false"/>
     </bean>
 
-    <!--
     <mvc:annotation-driven conversion-service="conversionService"/>
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" >
@@ -61,6 +60,6 @@
             </list>
         </property>
     </bean>
-     -->
+
 
 </beans>

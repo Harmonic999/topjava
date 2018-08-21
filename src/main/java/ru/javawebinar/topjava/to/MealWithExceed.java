@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class MealWithExceed {
     private final Integer id;
 
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private final LocalDateTime dateTime;
 
     private final String description;
