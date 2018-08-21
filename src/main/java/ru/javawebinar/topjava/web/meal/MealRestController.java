@@ -46,21 +46,33 @@ public class MealRestController extends AbstractMealController {
         super.update(meal, id);
     }
 
+    /*
     @Override
-    @GetMapping(value = "/between", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/between", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MealWithExceed> getBetween(
+            @RequestParam(value = "startDate", required = false) LocalDate startDate,
+            @RequestParam(value = "startTime", required = false) LocalTime startTime,
+            @RequestParam(value = "endDate", required = false) LocalDate endDate,
+            @RequestParam(value = "endTime", required = false) LocalTime endTime
+    ) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
+    }
+    */
 
-            @RequestParam("startDate")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+    @Override
+    @PostMapping(value = "/between", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MealWithExceed> getBetween(
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(value = "startDate", required = false) LocalDate startDate,
 
-            @RequestParam("startTime")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+            @RequestParam(value = "startTime", required = false) LocalTime startTime,
 
-            @RequestParam("endDate")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(value = "endDate", required = false) LocalDate endDate,
 
-            @RequestParam("endTime")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime
+            @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+            @RequestParam(value = "endTime", required = false) LocalTime endTime
     ) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
