@@ -40,3 +40,35 @@ $(function () {
     });
     makeEditable();
 });
+
+function setUserActiveOrInactiveStatus(userId) {
+    var checkbox = $("#userActiveOrInactiveStatusCheckbox_" + userId);
+    if (checkbox.is(":checked")) {
+        setActive(userId)
+    } else {
+        setInactive(userId)
+    }
+}
+
+function setActive(userId) {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "set_active",
+        data : {"id" : userId},
+        success: function () {
+            successNoty("User Active");
+        }
+    })
+    ;
+}
+
+function setInactive(userId) {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "set_inactive",
+        data : {"id" : userId},
+        success: function () {
+            successNoty("User Inactive");
+        }
+    });
+}

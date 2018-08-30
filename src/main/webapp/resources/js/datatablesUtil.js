@@ -47,19 +47,6 @@ function save() {
     });
 }
 
-function filter() {
-    var form = $("#filterForm");
-    $.ajax({
-        type : "POST",
-        url : "ajax/profile/meals/filter",
-        data: form.serialize(),
-        success: function (data) {
-            datatableApi.clear().rows.add(data).draw();
-            successNoty("Filtered")
-        }
-    });
-}
-
 var failedNote;
 
 function closeNoty() {
