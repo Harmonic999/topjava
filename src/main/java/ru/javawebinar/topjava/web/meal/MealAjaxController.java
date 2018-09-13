@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.ValidationUtil;
+import ru.javawebinar.topjava.util.exception.IllegalRequestDataException;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -40,17 +41,16 @@ public class MealAjaxController extends AbstractMealController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<String> createOrUpdate(@Valid Meal meal, BindingResult result) {
+    public void createOrUpdate(@Valid Meal meal, BindingResult result) {
         if (result.hasErrors()) {
             // TODO change to exception handler
-            return ValidationUtil.getErrorResponse(result);
+            throw new IllegalRequestDataException("Fill all fields correctly!");
         }
         if (meal.isNew()) {
             super.create(meal);
         } else {
             super.update(meal, meal.getId());
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override

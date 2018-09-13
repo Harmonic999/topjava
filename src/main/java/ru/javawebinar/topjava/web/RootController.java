@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,9 @@ public class RootController extends AbstractUserController {
     //    @Secured("ROLE_ADMIN")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
-    public String users() {
+    public String users(Model model) {
+        //UserTo user = new UserTo();
+        //model.addAttribute("userForm", user);
         return "users";
     }
 
@@ -46,6 +49,7 @@ public class RootController extends AbstractUserController {
     @PostMapping("/profile")
     public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
+
             return "profile";
         } else {
             super.update(userTo, SecurityUtil.authUserId());
